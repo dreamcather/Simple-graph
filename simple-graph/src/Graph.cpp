@@ -12,7 +12,7 @@ Vertex* Graph::getVertex(std::string _name)
 		return NULL;
 	}
 	else {
-		for (int i = 0; i < vertexList.size(); i++) {
+		for (std::size_t i = 0; i < vertexList.size(); i++) {
 			if (vertexList[i].getName() == _name)
 				return &vertexList[i];
 		}
@@ -61,6 +61,10 @@ int Graph::addEdge(std::string firstName, std::string secondName)
 
 int Graph::getPath(std::string firstName, std::string secondName)
 {
+	if (firstName == secondName) {
+		printf("%s \n", firstName.c_str());
+		return 0;
+	}
 	Vertex* first = getVertex(firstName);
 	Vertex* second = getVertex(secondName);
 	if ((first == NULL) || (second == NULL))
@@ -87,7 +91,7 @@ int Graph::getPath(std::string firstName, std::string secondName)
 			}
 		}
 		if (!directed) {
-			for (int i = 0; i < vertexList.size(); i++)
+			for (size_t i = 0; i < vertexList.size(); i++)
 			{
 				Vertex* current = vertexList[i].findEdge(currentVertex->getName());
 				if (current != NULL) {
@@ -118,26 +122,27 @@ int Graph::getPath(std::string firstName, std::string secondName)
 		printf("%s \n", (path[0]->getName()).c_str());
 		path.clear();
 	}
-	for (int i = 0; i < vertexList.size(); i++)
+	for (size_t i = 0; i < vertexList.size(); i++)
 	{
 		vertexList[i].setRoot(NULL);
 	}
 	if (flag)
 		return 0;
+	printf("Path does not exist \n");
 	return -1;
 }
 
 void Graph::show()
 {
 	if (!vertexList.empty()) {
-		for (int i = 0; i < vertexList.size(); i++) {
+		for (size_t i = 0; i < vertexList.size(); i++) {
 			printf("%s :", (vertexList[i].getName()).c_str());
 			for (int j = 0; j < vertexList[i].getDeg(); j++) {
 				printf("%s ", (vertexList[i].getEdge(j)->getName()).c_str());
 			}
 			if (!directed)
 			{
-				for (int k = 0; k < vertexList.size(); k++) {
+				for (size_t k = 0; k < vertexList.size(); k++) {
 					Vertex* current = vertexList[k].findEdge(vertexList[i].getName());
 					if(current!= NULL)
 						printf("%s ", (vertexList[k].getName()).c_str());
