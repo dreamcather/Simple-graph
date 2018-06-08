@@ -1,3 +1,4 @@
+Dvorjanchikov Evginiy
 "# Simple-graph" 
 
 Simple Graph lib:
