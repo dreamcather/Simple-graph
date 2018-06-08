@@ -7,7 +7,6 @@
 Vertex::Vertex(std::string _name)
 {
 	name = _name;
-	deg = 0;
 	root = NULL;
 }
 
@@ -18,7 +17,7 @@ std::string Vertex::getName()
 
 int Vertex::getDeg()
 {
-	return deg;
+	return adjancentEdges.size();
 }
 
 Vertex * Vertex::getRoot()
@@ -31,7 +30,7 @@ void Vertex::setRoot(Vertex * tmp)
 	root = tmp;
 }
 
-Vertex * Vertex::FindEdge(std::string _name)
+Vertex * Vertex::findEdge(std::string _name)
 {
 	if (adjancentEdges.size() == 0) {
 		return NULL;
@@ -47,10 +46,9 @@ Vertex * Vertex::FindEdge(std::string _name)
 
 int Vertex::addEdge(Vertex * value)
 {
-	if (FindEdge(value->getName()) != NULL)
+	if (findEdge(value->getName()) != NULL)
 		return -1;
 	adjancentEdges.push_back(value);
-	deg++;
 	return 0;
 }
 
@@ -61,4 +59,6 @@ Vertex * Vertex::getEdge(int i)
 
 Vertex::~Vertex()
 {
+	adjancentEdges.clear();
+	root = NULL;
 }

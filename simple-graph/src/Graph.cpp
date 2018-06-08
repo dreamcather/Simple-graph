@@ -20,7 +20,7 @@ Vertex* Graph::getVertex(std::string _name)
 	return NULL;
 }
 
-Graph::Graph(bool isDirected = true)
+Graph::Graph(bool isDirected )
 {
 	directed = isDirected;
 }
@@ -79,7 +79,7 @@ int Graph::getPath(std::string firstName, std::string secondName)
 				currentEdge = currentVertex->getEdge(i);
 				if (currentEdge->getRoot() == NULL) {
 					currentEdge->setRoot(currentVertex);
-					if (currentVertex->getName() == secondName) {
+					if (currentEdge->getName() == secondName) {
 						flag = true;
 					}
 					foundVertexs.push(currentEdge);
@@ -116,9 +116,14 @@ int Graph::getPath(std::string firstName, std::string secondName)
 			printf("%s ---> ", (path[i]->getName()).c_str());
 		}
 		printf("%s \n", (path[0]->getName()).c_str());
-		return 0;
-
+		path.clear();
 	}
+	for (int i = 0; i < vertexList.size(); i++)
+	{
+		vertexList[i].setRoot(NULL);
+	}
+	if (flag)
+		return 0;
 	return -1;
 }
 
