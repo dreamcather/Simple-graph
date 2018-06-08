@@ -12,7 +12,7 @@ public:
 	int getDeg();
 	Vertex* getRoot();
 	void setRoot(Vertex* tmp);
-	Vertex* FindEdge(std::string _name);
+	Vertex* findEdge(std::string _name);
 	int addEdge(Vertex* value);
 	Vertex* getEdge(int i);
 	~Vertex();
